@@ -1,8 +1,13 @@
+// ===== 5. backend/src/app.js (Version mise à jour) =====
 const express = require('express');
 const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 require('dotenv').config();
+
+// Importer les routes
+const authRoutes = require('./routes/auth');
+const User = require('./models/User');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -11,7 +16,10 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Database connection
+// Initialiser la base de données
+User.initializeDatabase();
+
+// Database connection pour les tests
 const dbPath = path.join(__dirname, '../database/database.db');
 const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
@@ -21,6 +29,9 @@ const db = new sqlite3.Database(dbPath, (err) => {
     }
 });
 
+// Routes
+app.use('/api/auth', authRoutes);
+
 // Route de test
 app.get('/api/test', (req, res) => {
     res.json({ message: 'Backend MoneyTrack connecté avec succès !' });
@@ -28,7 +39,7 @@ app.get('/api/test', (req, res) => {
 
 // Démarrer le serveur
 app.listen(PORT, () => {
-    console.log(`Serveur démarré sur http://localhost:${PORT}`);
+    console.log(` Serveur démarré sur http://localhost:${PORT}`);
 });
 
 module.exports = app;
