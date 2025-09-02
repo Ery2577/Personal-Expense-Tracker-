@@ -1,15 +1,8 @@
-import { useState } from 'react'
-import './App.css'
-// import tailwindcss from '@tailwindcss/vite' 
+import "./App.css"
+import AppRoutes from "../src/routes/index.tsx"; 
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-     <div className='text-center font-bold text-black text-2xl'>MoneyTrack</div>
-    </>
-  )
+  return <AppRoutes />;
 }
 
-export default App
+export default App;
