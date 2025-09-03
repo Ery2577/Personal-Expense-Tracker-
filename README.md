@@ -14,56 +14,6 @@ You can also view the project template in the template folder to visualize the t
 3. npm install 
 ```
 
-## MoneyTrack Structure
-```bash
-Personal-Expense-Tracker-
-├── backend
-│   ├── package.json
-│   ├── package-lock.json
-│   ├── prisma
-│   │   └── schema.prisma
-│   └── src
-│       ├── app.js
-│       ├── config
-│       ├── controllers
-│       ├── middlewares
-│       ├── routes
-│       ├── server.js
-│       └── utils
-├── frontend
-│   ├── eslint.config.js
-│   ├── index.html
-│   ├── package.json
-│   ├── package-lock.json
-│   ├── public
-│   │   └── vite.svg
-│   ├── README.md
-│   ├── src
-│   │   ├── App.css
-│   │   ├── App.tsx
-│   │   ├── assets
-│   │   ├── components
-│   │   ├── context
-│   │   ├── hooks
-│   │   ├── main.tsx
-│   │   ├── pages
-│   │   ├── routes
-│   │   ├── services
-│   │   ├── utils
-│   │   └── vite-env.d.ts
-│   ├── tsconfig.app.json
-│   ├── tsconfig.json
-│   ├── tsconfig.node.json
-│   └── vite.config.ts
-├── README.md
-└── Template
-    ├── Authentification.png
-    ├── Dashboard.png
-    ├── My Wallet.png
-    ├── Setting.png
-    └── Transaction.png
-```
-
 ## Technology employed
 1. For the Frontend : TailwindCSS, React, Vite
 2. For the Backend : Prisma, SQLite, Express, NodeJS, JWT
