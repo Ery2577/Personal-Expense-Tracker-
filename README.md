@@ -7,6 +7,13 @@ The project is structured as follows: all frontend files are in the frontend fol
 
 You can also view the project template in the template folder to visualize the task before using it.
 
+## Usage
+``` bash 
+1. git clone https://github.com/Ery2577/Personal-Expense-Tracker-.git   
+2. cd Personal-Expense-Tracker-  
+3. npm install 
+```
+
 ## Technology employed
 1. For the Frontend : TailwindCSS, React, Vite
 2. For the Backend : 
