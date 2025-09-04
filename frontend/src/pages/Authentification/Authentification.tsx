@@ -1,9 +1,21 @@
 import { useState } from 'react';
 import Button from '../../components/Button/Button';
+import { Toast, useToast } from '../../components/Toast';
 
 export default function Authentification() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
+  const { toast, showError, showSuccess, hideToast } = useToast();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Exemple d'utilisation du toast
+    if (isLogin) {
+      showError("Mot de passe incorrect");
+    } else {
+      showSuccess("Compte créé avec succès !");
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center p-5" style={{
@@ -38,7 +50,7 @@ export default function Authentification() {
               Authentification
             </h2>
             
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               {/* Champ Email */}
               <div>
                 <label className="block text-lg mb-2 font-medium" style={{ 
@@ -89,12 +101,17 @@ export default function Authentification() {
               {/* Boutons SignUp/Login */}
               <div className="flex gap-4 pt-4 justify-center">
                 <Button
+                  type="button"
                   variant={!isLogin ? 'primary' : 'secondary'}
-                  onClick={() => setIsLogin(false)}
+                  onClick={() => {
+                    setIsLogin(false);
+                    showSuccess("Mode inscription activé");
+                  }}
                 >
                   SignUp
                 </Button>
                 <Button
+                  type="submit"
                   variant={isLogin ? 'primary' : 'secondary'}
                   onClick={() => setIsLogin(true)}
                 >
@@ -126,6 +143,14 @@ export default function Authentification() {
           MoneyTrack
         </h1>
       </div>
+
+      {/* Toast pour les notifications */}
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        isVisible={toast.isVisible}
+        onClose={hideToast}
+      />
     </div>
   );
 }
