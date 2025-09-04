@@ -15,7 +15,7 @@ You can also view the project template in the template folder to visualize the t
 ```
 
 ## Technology employed
-1. For the Frontend : TailwindCSS, React, Vite
+1. For the Frontend : TailwindCSS, React, Vite, TypeScript
 2. For the Backend : Prisma, SQLite, Express, NodeJS, JWT
 
 
