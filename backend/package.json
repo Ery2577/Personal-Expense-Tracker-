@@ -10,8 +10,6 @@
         "prisma:migrate": "npx prisma migrate dev",
         "prisma:generate": "npx prisma generate",
         "prisma:studio": "npx prisma studio"
-
-
     },
     "keywords": [],
     "author": "",
@@ -20,6 +18,8 @@
     "dependencies": {
         "@prisma/client": "^6.15.0",
         "bcryptjs": "^3.0.2",
+        "cors": "^2.8.5",
+        "dotenv": "^16.6.1",
         "express": "^5.1.0",
         "jsonwebtoken": "^9.0.2",
         "prisma": "^6.15.0"
