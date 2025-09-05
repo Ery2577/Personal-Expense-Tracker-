@@ -1,63 +1,69 @@
+
 export default function Wallet() {
-  return (
-    <div className="min-h-screen bg-[#b8cc8a]  p-6">
-      {/* Title */}
-      <h1 className="text-lg font-bold mb-4">My wallet</h1>
+ return (
+   <div className="min-h-screen bg-green-300 p-4">
+     <div className="max-w-md mx-auto">
+       {/* Header */}
+       <h1 className="text-xl font-semibold text-gray-800 mb-6">My wallet</h1>
+       
+       {/* Principal Balance */}
+       <div className="bg-gray-200 rounded-lg p-4 mb-4 shadow-md hover:shadow-lg transition-shadow duration-200">
+         <h2 className="text-sm font-medium text-gray-600 mb-2">Principal balance</h2>
+         <div className="flex justify-between items-center">
+           <span className="text-lg text-gray-800">MGA 00.000</span>
+           <div className="text-right">
+             <div className="text-sm text-green-500">MGA 00.000</div>
+             <div className="text-sm text-red-500">MGA 00.000</div>
+           </div>
+         </div>
+       </div>
 
-      {/* Balance */}
-      <div className="bg-gray-100 p-4 rounded-xl shadow w-full max-w-3xl relative">
-        <h2 className="font-bold ">Principal balance</h2>
-        <p className="text-lg">MGA 00.000</p>
-        <div className="absolute bottom-4 right-4 flex flex-col text-sm text-right">
-          <span className="text-green-600">+MGA 00.000</span>
-          <span className="text-red-600">-MGA 00.000</span>
-        </div>
-      </div>
+       {/* Main Content Grid */}
+       <div className="grid grid-cols-2 gap-4 mb-4">
+         {/* Activities */}
+         <div className="bg-gray-200 rounded-lg p-4 h-48 shadow-md hover:shadow-lg transition-shadow duration-200">
+           <h3 className="text-center font-medium text-gray-700">Activities</h3>
+         </div>
 
-      {/* Grid Layout */}
-      <div className="grid grid-cols-2 gap-6">
-        {/* Activities */}
-        <div className="bg-gray-100 rounded-xl shadow p-4 h-64">
-          <h2 className="font-semibold">Activities</h2>
-        </div>
+         {/* Receipt Buttons */}
+         <div className="space-y-3">
+           <button className="w-full bg-gray-200 rounded-lg p-3 text-center shadow-md hover:bg-gray-300 hover:scale-105 hover:shadow-lg active:scale-95 active:shadow-sm transition-all duration-200 ease-in-out">
+             <div className="font-medium text-gray-700">Month receipt</div>
+             <div className="text-sm text-gray-500">Download</div>
+           </button>
+           
+           <button className="w-full bg-gray-200 rounded-lg p-3 text-center shadow-md hover:bg-gray-300 hover:scale-105 hover:shadow-lg active:scale-95 active:shadow-sm transition-all duration-200 ease-in-out">
+             <div className="font-medium text-gray-700">Week receipt</div>
+             <div className="text-sm text-gray-500">Download</div>
+           </button>
+           
+           <button className="w-full bg-gray-200 rounded-lg p-3 text-center shadow-md hover:bg-gray-300 hover:scale-105 hover:shadow-lg active:scale-95 active:shadow-sm transition-all duration-200 ease-in-out">
+             <div className="font-medium text-gray-700">Day receipt</div>
+             <div className="text-sm text-gray-500">Download</div>
+           </button>
+         </div>
+       </div>
 
-        {/* Receipts */}
-        <div className="flex flex-col space-y-4">
-          <button className="bg-gray-100 shadow rounded-xl px-4 py-3 text-left hover:bg-gray-200">
-            <span className="font-medium">Month receipt</span>
-            <br />
-            <span className="text-sm text-gray-500">Download</span>
-          </button>
-          <button className="bg-gray-100 shadow rounded-xl px-4 py-3 text-left hover:bg-gray-200">
-            <span className="font-medium">Week receipt</span>
-            <br />
-            <span className="text-sm text-gray-500">Download</span>
-          </button>
-          <button className="bg-gray-100 shadow rounded-xl px-4 py-3 text-left hover:bg-gray-200">
-            <span className="font-medium">Day receipt</span>
-            <br />
-            <span className="text-sm text-gray-500">Download</span>
-          </button>
-        </div>
-      </div>
+       {/* Bottom Section */}
+       <div className="grid grid-cols-2 gap-4">
+         {/* Action Buttons */}
+         <div className="space-y-3">
+           <button className="w-full bg-gray-200 rounded-lg p-4 text-green-500 font-medium shadow-md hover:bg-green-100 hover:scale-105 hover:shadow-lg active:scale-95 active:shadow-sm hover:text-green-600 transition-all duration-200 ease-in-out">
+             Depot
+           </button>
+           
+           <button className="w-full bg-gray-200 rounded-lg p-4 text-red-500 font-medium shadow-md hover:bg-red-100 hover:scale-105 hover:shadow-lg active:scale-95 active:shadow-sm hover:text-red-600 transition-all duration-200 ease-in-out">
+             Removal
+           </button>
+         </div>
 
-      {/* Bottom Part */}
-      <div className="grid grid-cols-2 gap-6 mt-6">
-        {/* Buttons */}
-        <div className="flex flex-col gap-4">
-          <button className="bg-gray-100 shadow rounded-xl py-3 font-semibold text-green-600 hover:bg-green-100">
-            Depot
-          </button>
-          <button className="bg-gray-100 shadow rounded-xl py-3 font-semibold text-red-600 hover:bg-red-100">
-            Removal
-          </button>
-        </div>
+         {/* Transaction List */}
+         <div className="bg-gray-200 rounded-lg p-4 h-32 shadow-md hover:shadow-lg transition-shadow duration-200">
+           <h3 className="text-center font-medium text-gray-700">Transaction list</h3>
+         </div>
+       </div>
+     </div>
+   </div>
+ );
+};
 
-        {/* Transaction list */}
-        <div className="bg-gray-100 rounded-xl shadow p-4 h-40">
-          <h2 className="font-semibold">Transaction list</h2>
-        </div>
-      </div>
-    </div>
-  );
-}
