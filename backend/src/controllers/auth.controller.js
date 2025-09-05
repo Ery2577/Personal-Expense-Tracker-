@@ -4,10 +4,8 @@ import prisma from '../config/prisma.js';
 
 // Fonction utilitaire pour générer un token JWT
 const generateToken = (userId) => {
-    return jwt.sign(
-        { userId },
-        process.env.JWT_SECRET,
-        { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
+    return jwt.sign({ userId },
+        process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
     );
 };
 
@@ -18,7 +16,7 @@ const isValidEmail = (email) => {
 };
 
 // Inscription
-export const register = async (req, res) => {
+export const register = async(req, res) => {
     try {
         const { email, password, firstName, lastName } = req.body;
 
@@ -26,21 +24,21 @@ export const register = async (req, res) => {
         if (!email || !password) {
             return res.status(400).json({
                 success: false,
-                message: 'Email et mot de passe sont requis'
+                message: 'Email and password required'
             });
         }
 
         if (!isValidEmail(email)) {
             return res.status(400).json({
                 success: false,
-                message: 'Format d\'email invalide'
+                message: 'Email Ivalide'
             });
         }
 
         if (password.length < 6) {
             return res.status(400).json({
                 success: false,
-                message: 'Le mot de passe doit contenir au moins 6 caractères'
+                message: 'Password must contain at least 6 characters'
             });
         }
 
@@ -52,7 +50,7 @@ export const register = async (req, res) => {
         if (existingUser) {
             return res.status(409).json({
                 success: false,
-                message: 'Un utilisateur avec cet email existe déjà'
+                message: 'A user with this email already exists'
             });
         }
 
@@ -82,7 +80,7 @@ export const register = async (req, res) => {
 
         res.status(201).json({
             success: true,
-            message: 'Utilisateur créé avec succès',
+            message: 'User successfully created',
             data: {
                 user,
                 token
@@ -90,16 +88,16 @@ export const register = async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Erreur lors de l\'inscription:', error);
+        console.error('registration error: ', error);
         res.status(500).json({
             success: false,
-            message: 'Erreur interne du serveur'
+            message: 'Internal server error'
         });
     }
 };
 
 // Connexion
-export const login = async (req, res) => {
+export const login = async(req, res) => {
     try {
         const { email, password } = req.body;
 
@@ -107,14 +105,14 @@ export const login = async (req, res) => {
         if (!email || !password) {
             return res.status(400).json({
                 success: false,
-                message: 'Email et mot de passe sont requis'
+                message: 'Email and password required'
             });
         }
 
         if (!isValidEmail(email)) {
             return res.status(400).json({
                 success: false,
-                message: 'Format d\'email invalide'
+                message: 'Email invalide'
             });
         }
 
@@ -126,7 +124,7 @@ export const login = async (req, res) => {
         if (!user) {
             return res.status(401).json({
                 success: false,
-                message: 'Email ou mot de passe incorrect'
+                message: 'Incorrect email or password'
             });
         }
 
@@ -136,7 +134,7 @@ export const login = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(401).json({
                 success: false,
-                message: 'Email ou mot de passe incorrect'
+                message: 'Incorrect email or password'
             });
         }
 
@@ -148,7 +146,7 @@ export const login = async (req, res) => {
 
         res.json({
             success: true,
-            message: 'Connexion réussie',
+            message: 'Successful connection',
             data: {
                 user: userWithoutPassword,
                 token
@@ -156,16 +154,16 @@ export const login = async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Erreur lors de la connexion:', error);
+        console.error('Connection error:', error);
         res.status(500).json({
             success: false,
-            message: 'Erreur interne du serveur'
+            message: 'Internal server error'
         });
     }
 };
 
 // Obtenir le profil utilisateur
-export const getProfile = async (req, res) => {
+export const getProfile = async(req, res) => {
     try {
         const userId = req.user.id;
 
@@ -183,7 +181,7 @@ export const getProfile = async (req, res) => {
         if (!user) {
             return res.status(404).json({
                 success: false,
-                message: 'Utilisateur non trouvé'
+                message: 'User not found'
             });
         }
 
@@ -193,16 +191,16 @@ export const getProfile = async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Erreur lors de la récupération du profil:', error);
+        console.error('Error when retrieving profile:', error);
         res.status(500).json({
             success: false,
-            message: 'Erreur interne du serveur'
+            message: 'Internal server error'
         });
     }
 };
 
 // Rafraîchir le token
-export const refreshToken = async (req, res) => {
+export const refreshToken = async(req, res) => {
     try {
         const { token } = req.body;
 
@@ -215,7 +213,7 @@ export const refreshToken = async (req, res) => {
 
         // Vérifier le token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        
+
         // Générer un nouveau token
         const newToken = generateToken(decoded.userId);
 
@@ -232,10 +230,10 @@ export const refreshToken = async (req, res) => {
             });
         }
 
-        console.error('Erreur lors du rafraîchissement du token:', error);
+        console.error('Error refreshing token:', error);
         res.status(500).json({
             success: false,
-            message: 'Erreur interne du serveur'
+            message: 'Internal server error'
         });
     }
 };

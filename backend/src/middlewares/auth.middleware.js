@@ -1,15 +1,15 @@
 import jwt from 'jsonwebtoken';
 import prisma from '../config/prisma.js';
 
-export const authenticate = async (req, res, next) => {
+export const authenticate = async(req, res, next) => {
     try {
         // Récupérer le token depuis le header Authorization
         const authHeader = req.headers.authorization;
-        
+
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
             return res.status(401).json({
                 success: false,
-                message: 'Token d\'authentification manquant'
+                message: 'Missing authentication token'
             });
         }
 
@@ -17,7 +17,7 @@ export const authenticate = async (req, res, next) => {
 
         // Vérifier et décoder le token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        
+
         // Récupérer l'utilisateur depuis la base de données
         const user = await prisma.user.findUnique({
             where: { id: decoded.userId },
@@ -33,7 +33,7 @@ export const authenticate = async (req, res, next) => {
         if (!user) {
             return res.status(401).json({
                 success: false,
-                message: 'Utilisateur non trouvé'
+                message: 'User not found'
             });
         }
 
@@ -52,14 +52,14 @@ export const authenticate = async (req, res, next) => {
         if (error instanceof jwt.TokenExpiredError) {
             return res.status(401).json({
                 success: false,
-                message: 'Token expiré'
+                message: 'Token expired'
             });
         }
 
         console.error('Erreur middleware authentification:', error);
         res.status(500).json({
             success: false,
-            message: 'Erreur interne du serveur'
+            message: 'Internal server error'
         });
     }
 };
