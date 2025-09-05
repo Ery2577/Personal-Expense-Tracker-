@@ -1,6 +1,10 @@
 import app from './app.js';
+import CategoryService from './service/category.service.js';
 
 const PORT = process.env.PORT || 5000;
+
+// Initialiser les catégories par défaut au démarrage
+CategoryService.initDefaultCategories();
 
 // Démarrage du serveur
 app.listen(PORT, () => {

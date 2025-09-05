@@ -1,7 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
 import routes from './routes/index.js';
+import { swaggerUi, specs } from './config/swagger.js';
 
 // Charger les variables d'environnement
 dotenv.config();
@@ -17,6 +19,16 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Servir les fichiers statiques (uploads)
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
+
+// Documentation Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {
+    explorer: true,
+    customCss: '.swagger-ui .topbar { display: none }',
+    customSiteTitle: 'Personal Expense Tracker API'
+}));
+
 // Routes
 app.use('/api', routes);
 
@@ -25,7 +37,8 @@ app.get('/', (req, res) => {
     res.json({ 
         message: 'Personal Expense Tracker API',
         version: '1.0.0',
-        status: 'running'
+        status: 'running',
+        documentation: '/api-docs'
     });
 });
 

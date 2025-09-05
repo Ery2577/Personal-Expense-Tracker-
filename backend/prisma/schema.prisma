@@ -12,11 +12,75 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(uuid())
   email     String   @unique
   password  String
   firstName String?
   lastName  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  expenses  Expense[]
+  incomes   Income[]
+  categories Category[]
+}
+
+model Expense {
+  id          String      @id @default(uuid())
+  amount      Float
+  date        DateTime?   // pour one-time uniquement
+  type        ExpenseType @default(ONE_TIME)
+  description String?
+  createdAt   DateTime    @default(now())
+
+  // Dates pour récurrent
+  startDate   DateTime?
+  endDate     DateTime?
+
+  // Relations
+  userId      String
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  categoryId  String
+  category    Category   @relation(fields: [categoryId], references: [id])
+
+  receipt     Receipt?
+}
+
+enum ExpenseType {
+  ONE_TIME
+  RECURRING
+}
+
+model Income {
+  id          String   @id @default(uuid())
+  amount      Float
+  date        DateTime
+  source      String
+  description String?
+  createdAt   DateTime @default(now())
+
+  // Relation
+  userId      String
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Category {
+  id        String   @id @default(uuid())
+  name      String
+  userId    String?  // null pour les catégories par défaut
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  expenses  Expense[]
+}
+
+model Receipt {
+  id         String   @id @default(uuid())
+  fileUrl    String   // stockage local
+  fileName   String
+  fileSize   Int
+  uploadedAt DateTime @default(now())
+
+  expenseId  String   @unique
+  expense    Expense  @relation(fields: [expenseId], references: [id], onDelete: Cascade)
 }
