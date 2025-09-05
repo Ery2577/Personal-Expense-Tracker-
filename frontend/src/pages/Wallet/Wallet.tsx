@@ -1,14 +1,14 @@
 export default function Wallet() {
   return (
-    <div className="min-h-screen bg-lime-300 p-6">
+    <div className="min-h-screen bg-[#b8cc8a]  p-6">
       {/* Title */}
       <h1 className="text-lg font-bold mb-4">My wallet</h1>
 
       {/* Balance */}
-      <div className="bg-gray-100 p-4 rounded-xl shadow w-full max-w-md mb-6">
-        <h2 className="font-bold">Principal balance</h2>
+      <div className="bg-gray-100 p-4 rounded-xl shadow w-full max-w-3xl relative">
+        <h2 className="font-bold ">Principal balance</h2>
         <p className="text-lg">MGA 00.000</p>
-        <div className="flex flex-col text-sm mt-2">
+        <div className="absolute bottom-4 right-4 flex flex-col text-sm text-right">
           <span className="text-green-600">+MGA 00.000</span>
           <span className="text-red-600">-MGA 00.000</span>
         </div>
