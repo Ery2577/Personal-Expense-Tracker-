@@ -1,6 +1,4 @@
-import React from 'react';
-
-const WalletTemplate: React.FC = () => {
+export default function Wallet(){
   return (
     <div className="min-h-screen bg-green-300 p-4">
       <div className="w-full h-full">{/* Removed max-w-md mx-auto */}
@@ -68,4 +66,3 @@ const WalletTemplate: React.FC = () => {
   );
 };
 
-export default WalletTemplate;
