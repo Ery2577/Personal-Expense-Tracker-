@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-export default function Wallet(){
-  return (
-    <div className="min-h-screen bg-green-300 p-4">
-      <div className="w-full h-full">{/* Removed max-w-md mx-auto */}
-        {/* Header */}
-        <h1 className="text-xl font-semibold text-gray-800 mb-6">My wallet</h1>
-        
-        {/* Principal Balance */}
-        <div className="bg-gray-200 rounded-lg p-4 mb-4">
-          <h2 className="text-sm font-medium text-gray-600 mb-2">Principal balance</h2>
-          <div className="flex justify-between items-center">
-            <span className="text-lg text-gray-800">MGA 00.000</span>
-            <div className="text-right">
-              <div className="text-sm text-green-500">MGA 00.000</div>
-              <div className="text-sm text-red-500">MGA 00.000</div>
-            </div>
-          </div>
-=======
 export default function Wallet() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#d7e4b2] to-[#b8cc8a] p-8 space-y-8 rounded-3xl">
@@ -60,7 +41,6 @@ export default function Wallet() {
               </tr>
             </tbody>
           </table>
->>>>>>> b889d49 (Style modification in Wallet page)
         </div>
 
         {/* Receipts */}
@@ -120,9 +100,4 @@ export default function Wallet() {
       </div>
     </div>
   );
-<<<<<<< HEAD
-};
-
-=======
 }
->>>>>>> b889d49 (Style modification in Wallet page)
