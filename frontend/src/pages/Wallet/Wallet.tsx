@@ -3,7 +3,7 @@ import React from 'react';
 const WalletTemplate: React.FC = () => {
   return (
     <div className="min-h-screen bg-green-300 p-4">
-      <div className="max-w-md mx-auto">
+      <div className="w-full h-full">{/* Removed max-w-md mx-auto */}
         {/* Header */}
         <h1 className="text-xl font-semibold text-gray-800 mb-6">My wallet</h1>
         
