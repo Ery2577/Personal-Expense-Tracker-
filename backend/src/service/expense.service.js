@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 class ExpenseService {
     // Créer une dépense
     async createExpense(userId, expenseData) {
-        const { amount, date, type, description, startDate, endDate, categoryId } = expenseData;
+        const { amount, date, type, description, startDate, endDate, categoryId, paymentMethod } = expenseData;
 
         // Vérifier que la catégorie existe
         const category = await prisma.category.findUnique({
@@ -22,6 +22,7 @@ class ExpenseService {
                 date: type === 'ONE_TIME' ? new Date(date) : null,
                 type: type || 'ONE_TIME',
                 description,
+                paymentMethod: paymentMethod || 'CASH',
                 startDate: type === 'RECURRING' ? new Date(startDate) : null,
                 endDate: type === 'RECURRING' && endDate ? new Date(endDate) : null,
                 userId,
@@ -80,7 +81,7 @@ class ExpenseService {
 
     // Mettre à jour une dépense
     async updateExpense(expenseId, userId, updateData) {
-        const { amount, date, type, description, startDate, endDate, categoryId } = updateData;
+        const { amount, date, type, description, startDate, endDate, categoryId, paymentMethod } = updateData;
 
         // Vérifier que la dépense existe et appartient à l'utilisateur
         const existingExpense = await prisma.expense.findFirst({
@@ -100,7 +101,8 @@ class ExpenseService {
                 description: description !== undefined ? description : undefined,
                 startDate: type === 'RECURRING' && startDate ? new Date(startDate) : undefined,
                 endDate: type === 'RECURRING' && endDate ? new Date(endDate) : undefined,
-                categoryId: categoryId || undefined
+                categoryId: categoryId || undefined,
+                paymentMethod: paymentMethod || undefined
             },
             include: {
                 category: true,

@@ -9,7 +9,7 @@ import DashboardService from '../service/dashboard.service.js';
 // Créer une dépense
 export const createExpense = async (req, res) => {
     try {
-        const { amount, date, type, description, startDate, endDate, categoryId } = req.body;
+        const { amount, date, type, description, startDate, endDate, categoryId, paymentMethod } = req.body;
         const userId = req.user.id;
 
         // Validation simple
@@ -21,7 +21,7 @@ export const createExpense = async (req, res) => {
         }
 
         const expense = await ExpenseService.createExpense(userId, {
-            amount, date, type, description, startDate, endDate, categoryId
+            amount, date, type, description, startDate, endDate, categoryId, paymentMethod
         });
 
         res.status(201).json({
@@ -87,11 +87,11 @@ export const getExpenseById = async (req, res) => {
 export const updateExpense = async (req, res) => {
     try {
         const { id } = req.params;
-        const { amount, date, type, description, startDate, endDate, categoryId } = req.body;
+        const { amount, date, type, description, startDate, endDate, categoryId, paymentMethod } = req.body;
         const userId = req.user.id;
 
         const expense = await ExpenseService.updateExpense(id, userId, {
-            amount, date, type, description, startDate, endDate, categoryId
+            amount, date, type, description, startDate, endDate, categoryId, paymentMethod
         });
 
         res.json({

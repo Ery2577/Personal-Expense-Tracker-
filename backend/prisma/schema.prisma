@@ -26,12 +26,13 @@ model User {
 }
 
 model Expense {
-  id          String      @id @default(uuid())
-  amount      Float
-  date        DateTime?   // pour one-time uniquement
-  type        ExpenseType @default(ONE_TIME)
-  description String?
-  createdAt   DateTime    @default(now())
+  id            String         @id @default(uuid())
+  amount        Float
+  date          DateTime?      // pour one-time uniquement
+  type          ExpenseType    @default(ONE_TIME)
+  description   String?
+  paymentMethod PaymentMethod  @default(CASH)
+  createdAt     DateTime       @default(now())
 
   // Dates pour récurrent
   startDate   DateTime?
@@ -50,6 +51,16 @@ model Expense {
 enum ExpenseType {
   ONE_TIME
   RECURRING
+}
+
+enum PaymentMethod {
+  CASH
+  CREDIT_CARD
+  DEBIT_CARD
+  BANK_TRANSFER
+  MOBILE_PAYMENT
+  CHECK
+  OTHER
 }
 
 model Income {

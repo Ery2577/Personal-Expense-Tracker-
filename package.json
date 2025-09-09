@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "jspdf": "^3.0.2",
+    "jspdf-autotable": "^5.0.2"
+  },
+  "devDependencies": {
+    "@types/jspdf": "^2.0.0"
+  }
+}

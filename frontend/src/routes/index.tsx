@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "../context/AuthContext";
 import Authentification from "../pages/Authentification/Authentification";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Wallet from "../pages/Wallet/Wallet";
@@ -9,9 +10,11 @@ import Layout from "../components/Layout/Layout";
 export default function AppRoutes() {
   return (
     <Router>
+      <AuthProvider>
       <Routes>
         {/* Auth page without layout */}
         <Route path="/" element={<Authentification />} />
+        <Route path="/login" element={<Authentification />} />
         
         {/* Pages with layout */}
         <Route path="/Dashboard" element={
@@ -35,6 +38,7 @@ export default function AppRoutes() {
           </Layout>
         } />
       </Routes>
+      </AuthProvider>
     </Router>
   )
 }

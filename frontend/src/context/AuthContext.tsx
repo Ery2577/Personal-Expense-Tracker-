@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { authService } from '../services/api';
 import type { User, LoginCredentials, RegisterCredentials } from '../services/api';
 
@@ -31,6 +32,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   // Récupérer le token du localStorage au chargement
   useEffect(() => {
@@ -95,6 +97,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     localStorage.removeItem('authUser');
     setUser(null);
     setToken(null);
+    navigate('/login'); // Rediriger vers la page de connexion
   };
 
   const value: AuthContextType = {

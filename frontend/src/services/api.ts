@@ -118,3 +118,149 @@ export const authService = {
     });
   },
 };
+
+// Types pour les expenses
+export interface Category {
+  id: string;
+  name: string;
+}
+
+export interface CreateExpenseData {
+  categoryId: string;
+  amount: number;
+  description?: string;
+  paymentMethod: string;
+  date: string;
+  type?: string;
+}
+
+export interface Expense {
+  id: string;
+  amount: number;
+  description?: string;
+  paymentMethod: string;
+  date: string;
+  category: Category;
+  createdAt: string;
+}
+
+// Services pour les catégories
+export const categoryService = {
+  // Récupérer toutes les catégories
+  getCategories: (token: string): Promise<{ success: boolean; data: Category[] }> => {
+    return makeRequest('/categories', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
+};
+
+// Types pour les incomes
+export interface CreateIncomeData {
+  amount: number;
+  source: string;
+  description?: string;
+  date: string;
+}
+
+export interface Income {
+  id: string;
+  amount: number;
+  source: string;
+  description?: string;
+  date: string;
+  createdAt: string;
+}
+
+// Services pour les expenses
+export const expenseService = {
+  // Créer une expense
+  createExpense: (expenseData: CreateExpenseData, token: string): Promise<{ success: boolean; data: Expense }> => {
+    return makeRequest('/transactions/expenses', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(expenseData),
+    });
+  },
+
+  // Récupérer toutes les expenses
+  getExpenses: (token: string): Promise<{ success: boolean; data: Expense[] }> => {
+    return makeRequest('/transactions/expenses', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
+
+  // Mettre à jour une expense
+  updateExpense: (token: string, id: string, expenseData: CreateExpenseData): Promise<{ success: boolean; data: Expense }> => {
+    return makeRequest(`/transactions/expenses/${id}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(expenseData),
+    });
+  },
+
+  // Supprimer une expense
+  deleteExpense: (token: string, id: string): Promise<{ success: boolean; message: string }> => {
+    return makeRequest(`/transactions/expenses/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
+};
+
+// Services pour les incomes
+export const incomeService = {
+  // Créer un income
+  createIncome: (incomeData: CreateIncomeData, token: string): Promise<{ success: boolean; data: Income }> => {
+    return makeRequest('/transactions/incomes', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(incomeData),
+    });
+  },
+
+  // Récupérer tous les incomes
+  getIncomes: (token: string): Promise<{ success: boolean; data: Income[] }> => {
+    return makeRequest('/transactions/incomes', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
+
+  // Mettre à jour un income
+  updateIncome: (token: string, id: string, incomeData: CreateIncomeData): Promise<{ success: boolean; data: Income }> => {
+    return makeRequest(`/transactions/incomes/${id}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(incomeData),
+    });
+  },
+
+  // Supprimer un income
+  deleteIncome: (token: string, id: string): Promise<{ success: boolean; message: string }> => {
+    return makeRequest(`/transactions/incomes/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
+};
