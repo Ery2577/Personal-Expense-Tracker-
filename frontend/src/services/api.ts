@@ -101,4 +101,20 @@ export const authService = {
       body: JSON.stringify({ token }),
     });
   },
+
+  // Changer le mot de passe
+  changePassword: (currentPassword: string, newPassword: string, token: string): Promise<{ success: boolean; message: string }> => {
+    const payload = { currentPassword, newPassword };
+    console.log('Sending password change request:', payload);
+    console.log('Token:', token);
+    
+    return makeRequest('/auth/change-password', {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+  },
 };

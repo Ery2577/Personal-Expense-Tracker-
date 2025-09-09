@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { register, login, getProfile, refreshToken } from '../controllers/auth.controller.js';
+import { register, login, getProfile, refreshToken, changePassword } from '../controllers/auth.controller.js';
 import { authenticate } from '../middlewares/auth.middleware.js';
 
 const router = Router();
@@ -169,5 +169,44 @@ router.post('/refresh', refreshToken);
  *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.get('/profile', authenticate, getProfile);
+
+/**
+ * @swagger
+ * /auth/change-password:
+ *   put:
+ *     summary: Changer le mot de passe de l'utilisateur
+ *     tags: [Authentication]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - currentPassword
+ *               - newPassword
+ *             properties:
+ *               currentPassword:
+ *                 type: string
+ *                 example: ancienMotDePasse123
+ *               newPassword:
+ *                 type: string
+ *                 minLength: 6
+ *                 example: nouveauMotDePasse123
+ *     responses:
+ *       200:
+ *         description: Mot de passe changé avec succès
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
+ *       400:
+ *         description: Données invalides
+ *       401:
+ *         description: Mot de passe actuel incorrect
+ */
+router.put('/change-password', authenticate, changePassword);
 
 export default router;
